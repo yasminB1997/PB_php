@@ -28,4 +28,19 @@ class UsuarioController{
         echo "<pre>";
         require "view/usuarioListar.php";
     }
+    public function telaEditar(){
+        $usuario = Usuario::buscar($_GET['id']);
+        require 'View/usuarioEditar.php';
+    }
+    public function atualizar(){
+        $usuario = new Usuario($_POST['nome'], $_POST['email']);
+        $usuario ->atualizar($_GET['id']);
+        header('Location: /PB_php/MVCexemplo/usuario/telaEditar?id='.($_GET['id']));
+        exit;
+    }
+    public function excluir(){
+        Usuario::excluir($_GET['id']);
+        header('Location: PB_php/MVCexemplo/usuario/excluir');
+        exit;
+    }
 }
